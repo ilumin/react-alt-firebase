@@ -31,3 +31,8 @@ and set .babelrc to
   "presets": ["react", "es2015", "stage-0"]
 }
 ```
+
+# React hot loader
+to run server use webpack-dev-server by `npm i -g webpack-dev-server`
+React-hot-loader is very impressive, it's just change only updated data
+but not update state or customize attribute we do in devtool
