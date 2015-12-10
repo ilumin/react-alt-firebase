@@ -1,6 +1,7 @@
 import React from 'react';
 import MessageList from './MessageList.jsx';
 import ChannelList from './ChannelList.jsx';
+import MessageBox from './MessageBox.jsx';
 import mui from 'material-ui';
 
 const {
@@ -31,13 +32,22 @@ class App extends React.Component {
       <div>
         <AppBar title="React Chat" />
         <div style={{
-            display: 'flex',
-            flexFlow: 'row wrap',
             maxWidth: 1200,
-            with: '100%'
+            margin: '0 auto'
           }}>
-          <ChannelList />
-          <MessageList />
+          <div style={{
+              display: 'flex',
+              flexFlow: 'row wrap'
+            }}>
+            <ChannelList />
+            <MessageList />
+          </div>
+          <div style={{
+              display: 'flex',
+              flexFlow: 'row wrap'
+            }}>
+            <MessageBox />
+          </div>
         </div>
       </div>
     );
