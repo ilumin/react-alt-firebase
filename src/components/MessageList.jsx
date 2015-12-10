@@ -26,7 +26,9 @@ class MessageList extends React.Component {
     });
 
     return (
-      <Card>
+      <Card style={{
+          flexGrow: 2
+        }}>
         <List>{messageNodes}</List>
       </Card>
     );
