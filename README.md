@@ -17,3 +17,17 @@
   - Less boilerplate
   - ES7 decorators
 - Routing with React-Router
+
+# Babel preset
+In tutorial use the old version Babel (v5), so in .babelrc they use deprecate
+option `stage: 0` (see package config in: [https://github.com/hendrikswan/react-stack/blob/master/package.json])
+for new version of Babel (v6), we need to install presets: react, es2015, stage-0 by
+```
+npm i babel-preset-es2015 babel-preset-react babel-preset-stage-0 --save-dev
+```
+and set .babelrc to
+```
+{
+  "presets": ["react", "es2015", "stage-0"]
+}
+```
