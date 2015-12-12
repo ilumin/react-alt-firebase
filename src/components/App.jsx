@@ -2,7 +2,10 @@ import React from 'react';
 import MessageList from './MessageList.jsx';
 import ChannelList from './ChannelList.jsx';
 import MessageBox from './MessageBox.jsx';
+import Login from './Login.jsx';
 import mui from 'material-ui';
+import connectToStores from 'alt/utils/connectToStores';
+import ChatStore from '../stores/ChatStore';
 
 const {
   Styles
@@ -12,9 +15,18 @@ const ThemeManager = Styles.ThemeManager;
 const LightRawTheme = Styles.LightRawTheme;
 const AppBar = mui.AppBar;
 
+@connectToStores
 class App extends React.Component {
   constructor () {
     super();
+  }
+
+  static getStores() {
+    return [ChatStore];
+  }
+
+  static getPropsFromStores() {
+    return ChatStore.getState();
   }
 
   static childContextTypes = {
@@ -28,12 +40,11 @@ class App extends React.Component {
   }
 
   render () {
-    return (
-      <div>
-        <AppBar title="React Chat" />
-        <div style={{
-            margin: '0 auto'
-          }}>
+    var view = <Login />;
+
+    if (this.props.user) {
+      view = (
+        <div>
           <div style={{
               display: 'flex',
               flexFlow: 'row wrap'
@@ -48,6 +59,13 @@ class App extends React.Component {
             <MessageBox />
           </div>
         </div>
+      )
+    }
+
+    return (
+      <div>
+        <AppBar title="React Chat" />
+        {{view}}
       </div>
     );
   }
