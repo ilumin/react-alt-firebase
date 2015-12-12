@@ -4,7 +4,7 @@ import ChannelList from './ChannelList.jsx';
 import MessageBox from './MessageBox.jsx';
 import Login from './Login.jsx';
 import mui from 'material-ui';
-import connectToStores from 'alt/utils/connectToStores';
+// import connectToStores from 'alt/utils/connectToStores';
 import ChatStore from '../stores/ChatStore';
 
 const {
@@ -15,18 +15,36 @@ const ThemeManager = Styles.ThemeManager;
 const LightRawTheme = Styles.LightRawTheme;
 const AppBar = mui.AppBar;
 
-@connectToStores
+// babel6 not support decorate
+// @connectToStores
 class App extends React.Component {
   constructor () {
     super();
   }
 
-  static getStores() {
-    return [ChatStore];
+  // babel 6 not support
+  // static getStores() {
+  //   return [ChatStore];
+  // }
+  //
+  // static getPropsFromStores() {
+  //   return ChatStore.getState();
+  // }
+
+  getInitialState() {
+    ChatStore.getState();
   }
 
-  static getPropsFromStores() {
-    return ChatStore.getState();
+  componentDidMount() {
+    ChatStore.listen(this.onChange);
+  }
+
+  componentWillUnmount() {
+    ChatStore.unlisten(this.onChange);
+  }
+
+  onChange(state) {
+    this.setState(state);
   }
 
   static childContextTypes = {
@@ -42,7 +60,7 @@ class App extends React.Component {
   render () {
     var view = <Login />;
 
-    if (this.props.user) {
+    if (this.props.state.user) {
       view = (
         <div>
           <div style={{
