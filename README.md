@@ -36,3 +36,9 @@ and set .babelrc to
 to run server use webpack-dev-server by `npm i -g webpack-dev-server`
 React-hot-loader is very impressive, it's just change only updated data
 but not update state or customize attribute we do in devtool
+
+# Flux && Alt
+- `action` event that get fire
+- `dispatcher` event broker
+- `store` event state
+- `view` the one that change and fire event as an action 
