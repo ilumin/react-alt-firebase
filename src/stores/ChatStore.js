@@ -4,7 +4,7 @@ import Actions from '../actions';
 import ChannelSource from '../sources/ChannelSource';
 import _ from 'lodash';
 
-@datasource(ChannelSource)
+// @datasource(ChannelSource)
 // @decorate(alt)
 class ChatStore {
 
@@ -13,13 +13,15 @@ class ChatStore {
 
     // babel6 bind pattern
     this.bindListeners({
-      login: Actions.LOGIN
+      login: Actions.LOGIN,
+      receivedChannels: Actions.CHANNELS_RECEIVED
     });
   }
 
-  @bind(Action.channelsReceived)
+  // @bind(Action.channelsReceived)
   receivedChannels(channels) {
     let selectedChannel;
+
     _(channels)
       .keys()
       .each((key, index) => {
@@ -41,6 +43,10 @@ class ChatStore {
   // @bind(Actions.login)
   login(user) {
     this.setState({user: user})
+  }
+
+  getChannels() {
+    ChannelSource.getChannels();
   }
 
 }
