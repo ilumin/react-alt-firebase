@@ -27,7 +27,15 @@ class MessageList extends React.Component {
       this.state.messages[messageVal.key] = messageVal;
       this.setState({
         messages: this.state.messages
-      })
+      });
+    });
+
+    this.firebaseRef.on("child_removed", (message) => {
+      var key = message.key();
+      delete this.state.messages[key];
+      this.setState({
+        messages: this.state.messages
+      });
     });
   }
 
