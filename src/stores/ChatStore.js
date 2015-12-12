@@ -1,15 +1,21 @@
 import alt from '../alt';
 import Actions from '../actions';
-import {decorate, bind, datasource} from 'alt/utils/decorators';
+// import {decorate, bind, datasource} from 'alt/utils/decorators';
 
 @decorate(alt)
 class ChatStore {
 
   constructor() {
     this.state = {user: null};
+
+    // babel6 bind pattern
+    this.bindListeners({
+      login: Actions.LOGIN
+    });
   }
 
-  @bind(Actions.login)
+  // decorators is deprecate on babel6
+  // @bind(Actions.login)
   login(user) {
     this.setState({user: user})
   }

@@ -16,7 +16,12 @@ class Login extends React.Component {
 
   render() {
     return (
-
+      <Card style={{'padding': '50px'}}>
+        <CardText style={{'textAlign': 'center'}}>
+          To start chatting, please login with your Google account
+          <RaisedButton onClick={this.onClick.bind(this)} />
+        </CardText>
+      </Card>
     );
   }
 

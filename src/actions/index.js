@@ -11,7 +11,7 @@ class Actions {
           return;
         }
 
-        dispatch(user);
+        this.dispatch(user);
       })
     }
   }

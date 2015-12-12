@@ -29,5 +29,8 @@
     "style-loader": "^0.13.0",
     "trim": "0.0.1",
     "webpack": "^1.12.9"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-decorators-legacy": "^1.2.0"
   }
 }
