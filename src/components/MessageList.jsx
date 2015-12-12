@@ -17,7 +17,7 @@ class MessageList extends React.Component {
     };
 
     this.firebaseRef = new Firebase('https://luminous-torch-3780.firebaseio.com/messages');
-    this.firebaseRef.once("value", (dataSnapshot) => {
+    this.firebaseRef.on("value", (dataSnapshot) => {
       var messagesVal = dataSnapshot.val();
       var messages = _(messagesVal)
         .keys()
