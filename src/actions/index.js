@@ -3,6 +3,13 @@ import Firebase from 'firebase';
 
 class Actions {
 
+  constructor() {
+    this.generateActions(
+      'channelsReceived',
+      'channelsFailed'
+    );
+  }
+
   login (args) {
     return (dispatch) => {
       let firebaseRef = new Firebase('https://luminous-torch-3780.firebaseio.com');

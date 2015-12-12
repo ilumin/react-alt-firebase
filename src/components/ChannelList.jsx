@@ -1,29 +1,57 @@
 import React from 'react';
 import Channel from './Channel.jsx';
 import mui from 'material-ui';
+import connectToStores from 'alt/utils/connectToStores';
+import ChatStore from '../stores/ChatStore.js';
 
 const {
   Card,
-  List
+  List,
+  CircularProgress
 } = mui;
 
+@connectToStores
 class ChannelList extends React.Component {
   constructor (props) {
     super(props);
-    this.state = {
-      channels: [
-        'Dog',
-        'Cat'
-      ]
-    };
+    ChatStore.getChannels();
+  }
+
+  static getStores() {
+    return [ChatStore];
+  }
+
+  static getPropsFromStores() {
+    return ChatStore.getState();
   }
 
   render () {
-    var channelNodes = this.state.channels.map( (channel) => {
+    if (!this.props.channels) {
       return (
-        <Channel message={channel} />
+        <Card style={{flexGrow: 1}}>
+          <CircularProgress
+            mode="indeterminate"
+            style={{
+              paddingTop: '20px',
+              paddingBottom: '20px',
+              margin: '0 auto',
+              display: 'block',
+              width: '60px'
+            }}
+          />
+        </Card>
       );
-    });
+    }
+
+    var channelNodes = _(this.props.channels)
+      .keys()
+      .map( (key) => {
+        let channel = this.props.channels[key];
+        return (
+          <Channel message={channel} />
+        );
+      })
+      .value();
 
     return (
       <Card style={{
