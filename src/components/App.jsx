@@ -9,7 +9,7 @@ const {
 } = mui;
 
 const ThemeManager = Styles.ThemeManager;
-const DarkRawTheme = Styles.DarkRawTheme;
+const LightRawTheme = Styles.LightRawTheme;
 const AppBar = mui.AppBar;
 
 class App extends React.Component {
@@ -23,7 +23,7 @@ class App extends React.Component {
 
   getChildContext () {
     return {
-      muiTheme: ThemeManager.getMuiTheme(DarkRawTheme)
+      muiTheme: ThemeManager.getMuiTheme(LightRawTheme)
     };
   }
 
@@ -32,7 +32,6 @@ class App extends React.Component {
       <div>
         <AppBar title="React Chat" />
         <div style={{
-            maxWidth: 1200,
             margin: '0 auto'
           }}>
           <div style={{

@@ -13,8 +13,7 @@ class MessageBox extends React.Component {
   render () {
     return (
       <Card style={{
-          flexGrow: 1,
-          maxWidth: 1200
+          flexGrow: 1
         }}>
         <textarea style={{
             width: '100%',
