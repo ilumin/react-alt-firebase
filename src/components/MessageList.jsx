@@ -1,6 +1,8 @@
 import React from 'react';
 import Message from './Message.jsx';
 import mui from 'material-ui';
+import Firebase from 'firebase';
+import _ from 'lodash';
 
 const {
   Card,
@@ -11,17 +13,22 @@ class MessageList extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      messages: [
-        'HI THERE HOW ARE YOU!',
-        'I AM FINE!'
-      ]
+      messages: []
     };
+
+    this.firebaseRef = new Firebase('https://luminous-torch-3780.firebaseio.com/messages');
+    this.firebaseRef.once("value", (dataSnapshot) => {
+      var messages = dataSnapshot.val();
+      this.setState({
+        messages: messages
+      });
+    });
   }
 
   render () {
-    var messageNodes = this.state.messages.map( (message) => {
+    var messageNodes = this.state.messages.map( (messageItem) => {
       return (
-        <Message message={message} />
+        <Message message={messageItem.message} />
       );
     });
 
