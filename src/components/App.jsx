@@ -21,20 +21,20 @@ class App extends React.Component {
   constructor () {
     super();
 
-    var chatState = ChatStore.getState();
-
-    this.state = {
-      user: chatState.user
-    }
+    this.state = ChatStore.getState();
   }
 
-  // static getStores() {
-  //   return [ChatStore];
-  // }
-  //
-  // static getPropsFromStores() {
-  //   return ChatStore.getState();
-  // }
+  componentDidMount() {
+    ChatStore.listen(this.onChange.bind(this));
+  }
+
+  componentWillUnmount() {
+    ChatStore.unlisten(this.onChange.bind(this));
+  }
+
+  onChange(state) {
+    this.setState(state);
+  }
 
   static childContextTypes = {
     muiTheme: React.PropTypes.object
@@ -48,8 +48,6 @@ class App extends React.Component {
 
   render () {
     var view = <Login />;
-
-    console.log('this.state:', this.state);
 
     if (this.state.user) {
       view = <div>
