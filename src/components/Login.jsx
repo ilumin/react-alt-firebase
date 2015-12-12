@@ -18,8 +18,8 @@ class Login extends React.Component {
     return (
       <Card style={{'padding': '50px'}}>
         <CardText style={{'textAlign': 'center'}}>
-          To start chatting, please login with your Google account
-          <RaisedButton onClick={this.onClick.bind(this)} />
+          To start chatting, please login with your Google account.
+          <RaisedButton label="Login with Google Account" primary={true} fullWidth={true} onClick={this.onClick.bind(this)} />
         </CardText>
       </Card>
     );

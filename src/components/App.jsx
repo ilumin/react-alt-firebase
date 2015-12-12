@@ -22,29 +22,12 @@ class App extends React.Component {
     super();
   }
 
-  // babel 6 not support
-  // static getStores() {
-  //   return [ChatStore];
-  // }
-  //
-  // static getPropsFromStores() {
-  //   return ChatStore.getState();
-  // }
-
-  getInitialState() {
-    ChatStore.getState();
+  static getStores() {
+    return [ChatStore];
   }
 
-  componentDidMount() {
-    ChatStore.listen(this.onChange);
-  }
-
-  componentWillUnmount() {
-    ChatStore.unlisten(this.onChange);
-  }
-
-  onChange(state) {
-    this.setState(state);
+  static getPropsFromStores() {
+    return ChatStore.getState();
   }
 
   static childContextTypes = {
@@ -60,30 +43,30 @@ class App extends React.Component {
   render () {
     var view = <Login />;
 
-    if (this.props.state.user) {
-      view = (
-        <div>
-          <div style={{
-              display: 'flex',
-              flexFlow: 'row wrap'
-            }}>
-            <ChannelList />
-            <MessageList />
-          </div>
-          <div style={{
-              display: 'flex',
-              flexFlow: 'row wrap'
-            }}>
-            <MessageBox />
-          </div>
+    console.log('this.props:', this.props);
+
+    if (this.props.user) {
+      view = <div>
+        <div style={{
+            display: 'flex',
+            flexFlow: 'row wrap'
+          }}>
+          <ChannelList />
+          <MessageList />
         </div>
-      )
+        <div style={{
+            display: 'flex',
+            flexFlow: 'row wrap'
+          }}>
+          <MessageBox />
+        </div>
+      </div>;
     }
 
     return (
       <div>
         <AppBar title="React Chat" />
-        {{view}}
+        {view}
       </div>
     );
   }

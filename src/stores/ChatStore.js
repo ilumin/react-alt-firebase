@@ -2,11 +2,11 @@ import alt from '../alt';
 import Actions from '../actions';
 // import {decorate, bind, datasource} from 'alt/utils/decorators';
 
-@decorate(alt)
+// @decorate(alt)
 class ChatStore {
 
   constructor() {
-    this.state = {user: null};
+    this.state = {user: 'yeahh'};
 
     // babel6 bind pattern
     this.bindListeners({
