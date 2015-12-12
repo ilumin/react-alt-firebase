@@ -13,28 +13,26 @@ class MessageList extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      messages: []
+      messages: {}
     };
 
     this.firebaseRef = new Firebase('https://luminous-torch-3780.firebaseio.com/messages');
-    this.firebaseRef.on("value", (dataSnapshot) => {
-      var messagesVal = dataSnapshot.val();
-      var messages = _(messagesVal)
-        .keys()
-        .map( (messageKey) => {
-          var cloned = _.clone(messagesVal[messageKey]);
-          cloned.key = messageKey;
-          return cloned;
-        })
-        .value();
+    this.firebaseRef.on("child_added", (message) => {
+      if (this.state.messages[message.key()]) {
+        return;
+      }
+
+      let messageVal = message.val();
+      messageVal.key = message.key();
+      this.state.messages[messageVal.key] = messageVal;
       this.setState({
-        messages: messages
-      });
+        messages: this.state.messages
+      })
     });
   }
 
   render () {
-    var messageNodes = this.state.messages.map( (messageItem) => {
+    var messageNodes = _.values(this.state.messages).map( (messageItem) => {
       return (
         <Message message={messageItem.message} />
       );
