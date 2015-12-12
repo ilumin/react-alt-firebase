@@ -6,7 +6,7 @@ import Actions from '../actions';
 class ChatStore {
 
   constructor() {
-    this.state = {user: 'yeahh'};
+    this.state = {user: null};
 
     // babel6 bind pattern
     this.bindListeners({

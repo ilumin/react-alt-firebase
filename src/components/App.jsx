@@ -20,15 +20,21 @@ const AppBar = mui.AppBar;
 class App extends React.Component {
   constructor () {
     super();
+
+    var chatState = ChatStore.getState();
+
+    this.state = {
+      user: chatState.user
+    }
   }
 
-  static getStores() {
-    return [ChatStore];
-  }
-
-  static getPropsFromStores() {
-    return ChatStore.getState();
-  }
+  // static getStores() {
+  //   return [ChatStore];
+  // }
+  //
+  // static getPropsFromStores() {
+  //   return ChatStore.getState();
+  // }
 
   static childContextTypes = {
     muiTheme: React.PropTypes.object
@@ -43,9 +49,9 @@ class App extends React.Component {
   render () {
     var view = <Login />;
 
-    console.log('this.props:', this.props);
+    console.log('this.state:', this.state);
 
-    if (this.props.user) {
+    if (this.state.user) {
       view = <div>
         <div style={{
             display: 'flex',
