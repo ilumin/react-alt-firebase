@@ -3,48 +3,40 @@ import Message from './Message.jsx';
 import mui from 'material-ui';
 import Firebase from 'firebase';
 import _ from 'lodash';
+import connectToStores from 'alt/utils/connectToStores';
+import ChatStore from '../stores/ChatStore';
 
 const {
   Card,
   List
 } = mui;
 
+@connectToStores
 class MessageList extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
       messages: {}
     };
+  }
 
-    this.firebaseRef = new Firebase('https://luminous-torch-3780.firebaseio.com/messages');
-    this.firebaseRef.on("child_added", (message) => {
-      if (this.state.messages[message.key()]) {
-        return;
-      }
+  static getStores() {
+    return [ChatStore];
+  }
 
-      let messageVal = message.val();
-      messageVal.key = message.key();
-      this.state.messages[messageVal.key] = messageVal;
-      this.setState({
-        messages: this.state.messages
-      });
-    });
-
-    this.firebaseRef.on("child_removed", (message) => {
-      var key = message.key();
-      delete this.state.messages[key];
-      this.setState({
-        messages: this.state.messages
-      });
-    });
+  static getPropsFromStores() {
+    return ChatStore.getState();
   }
 
   render () {
-    var messageNodes = _.values(this.state.messages).map( (messageItem) => {
-      return (
-        <Message message={messageItem.message} />
-      );
-    });
+    let messageNodes = null;
+    if (this.props.messages) {
+      messageNodes = _.values(this.props.messages).map( (messageItem) => {
+        return (
+          <Message message={messageItem.message} />
+        );
+      });
+    }
 
     return (
       <Card style={{

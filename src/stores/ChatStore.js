@@ -45,11 +45,12 @@ class ChatStore {
       })
       .value();
 
-    console.log('selectedChannel:', selectedChannel);
     this.setState({
       channels,
       selectedChannel
     });
+
+    setTimeout(this.getInstance().getMessages, 100);
   }
 
   @bind(Actions.login)
