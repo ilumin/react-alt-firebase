@@ -3,6 +3,13 @@ import Firebase from 'firebase';
 
 let firebaseRef = null;
 let MessageSource = {
+  sendMessage: {
+    remote(state) {
+      
+    },
+    success: Actions.messageSendSuccess,
+    error: Actions.messageSendError
+  },
   getMessages: {
     remote(state) {
       if (firebaseRef) {
