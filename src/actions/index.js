@@ -18,7 +18,7 @@ class Actions {
     );
   }
 
-  login (args) {
+  login (router) {
     return (dispatch) => {
       let firebaseRef = new Firebase('https://luminous-torch-3780.firebaseio.com');
       firebaseRef.authWithOAuthPopup('google', (error, user) => {
@@ -27,7 +27,9 @@ class Actions {
         }
 
         dispatch(user);
-      })
+
+        router.transitionTo('/chat');
+      });
     }
   }
 
