@@ -16,3 +16,5 @@ let ChannelSource = {
     error: Actions.channelsFailed
   }
 }
+
+export default ChannelSource;

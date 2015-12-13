@@ -1,7 +1,7 @@
 import React from 'react';
 import Channel from './Channel.jsx';
 import mui from 'material-ui';
-// import connectToStores from 'alt/utils/connectToStores';
+import connectToStores from 'alt/utils/connectToStores';
 import ChatStore from '../stores/ChatStore.js';
 
 const {
@@ -10,27 +10,23 @@ const {
   CircularProgress
 } = mui;
 
-// @connectToStores
+@connectToStores
 class ChannelList extends React.Component {
   constructor (props) {
     super(props);
-    this.state = ChatStore.getChannels();
+    ChatStore.getChannels();
   }
 
-  componentDidMount() {
-    ChatStore.listen(this.onChange.bind(this));
+  static getStores() {
+    return [ChatStore];
   }
 
-  componentWillUnmount() {
-    ChatStore.unlisten(this.onChange.bind(this));
-  }
-
-  onChange(state) {
-    this.setState(state);
+  static getPropsFromStores() {
+    return ChatStore.getState();
   }
 
   render () {
-    if (!this.state.channels) {
+    if (!this.props.channels) {
       return (
         <Card style={{flexGrow: 1}}>
           <CircularProgress
@@ -47,12 +43,12 @@ class ChannelList extends React.Component {
       );
     }
 
-    var channelNodes = _(this.state.channels)
+    var channelNodes = _(this.props.channels)
       .keys()
-      .map( (key) => {
+      .map((key) => {
         let channel = this.props.channels[key];
         return (
-          <Channel message={channel} />
+          <Channel channel={channel} />
         );
       })
       .value();

@@ -14,8 +14,6 @@ class Actions {
     return (dispatch) => {
       let firebaseRef = new Firebase('https://luminous-torch-3780.firebaseio.com');
       firebaseRef.authWithOAuthPopup('google', (error, user) => {
-        console.log('error:', error);
-        console.log('user:', user);
         if (error) {
           return;
         }

@@ -4,7 +4,7 @@ import {decorate, bind, datasource} from 'alt/utils/decorators';
 import ChannelSource from '../sources/ChannelSource';
 import _ from 'lodash';
 
-// @datasource(ChannelSource)
+@datasource(ChannelSource)
 @decorate(alt)
 class ChatStore {
 
@@ -12,7 +12,7 @@ class ChatStore {
     this.state = {user: null};
   }
 
-  // @bind(Action.channelsReceived)
+  @bind(Actions.channelsReceived)
   receivedChannels(channels) {
     let selectedChannel;
 
@@ -27,7 +27,8 @@ class ChatStore {
       })
       .value();
 
-    this.seState({
+    console.log('selectedChannel:', selectedChannel);
+    this.setState({
       channels,
       selectedChannel
     });
@@ -36,10 +37,6 @@ class ChatStore {
   @bind(Actions.login)
   login(user) {
     this.setState({user: user})
-  }
-
-  getChannels() {
-    ChannelSource.getChannels();
   }
 
 }
