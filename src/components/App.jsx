@@ -42,7 +42,7 @@ class App extends React.Component {
   render () {
     var view = <Login />;
 
-    if (this.props.user || 1) {
+    if (this.props.user) {
       view = (
         <div>
           <div style={{
