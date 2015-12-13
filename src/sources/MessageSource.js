@@ -16,6 +16,7 @@ let MessageSource = {
         });
       });
     },
+    loading: Actions.messagesLoading,
     success: Actions.messagesReceived,
     error: Actions.messagesFailed
   }
