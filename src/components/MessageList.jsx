@@ -8,6 +8,7 @@ import ChatStore from '../stores/ChatStore';
 
 const {
   Card,
+  CircularProgress,
   List
 } = mui;
 
@@ -30,12 +31,26 @@ class MessageList extends React.Component {
 
   render () {
     let messageNodes = null;
-    if (this.props.messages) {
+    if (!this.props.messagesLoading) {
       messageNodes = _.values(this.props.messages).map( (messageItem) => {
         return (
           <Message message={messageItem.message} />
         );
       });
+    }
+    else {
+      messageNodes = (
+        <CircularProgress
+          mode="indeterminate"
+          style={{
+            paddingTop: '20px',
+            paddingBottom: '20px',
+            margin: '0 auto',
+            display: 'block',
+            width: '60px'
+          }}
+        />
+      );
     }
 
     return (
