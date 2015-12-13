@@ -11,6 +11,7 @@ class Actions {
       'messagesFailed',
       'channelOpened',
       'sendMessage',
+      'messageReceived',
       'messageSendSuccess',
       'messageSendError',
       'messagesLoading'

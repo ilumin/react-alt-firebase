@@ -45,6 +45,18 @@ class ChatStore {
     });
   }
 
+  @bind(Actions.messageReceived)
+  messageReceived(message) {
+    if (this.state.messages[message.key]) {
+      return;
+    }
+
+    this.state.messages[message.key] = message;
+    this.setState({
+      messages: this.state.messages
+    });
+  }
+
   @bind(Actions.channelsReceived)
   receivedChannels(channels) {
     let selectedChannel;
