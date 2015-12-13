@@ -1,7 +1,7 @@
 import React from 'react';
-import MessageList from './MessageList';
-import ChannelList from './ChannelList';
-import MessageBox from './MessageBox';
+import MessageList from './MessageList.jsx';
+import ChannelList from './ChannelList.jsx';
+import MessageBox from './MessageBox.jsx';
 
 class Chat extends React.Component {
   render() {
