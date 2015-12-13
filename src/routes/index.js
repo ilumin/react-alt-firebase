@@ -15,6 +15,6 @@ let routes = (
   </Route>
 );
 
-Router.run(routers, Router.HashLocation, (Root) => {
+Router.run(routes, Router.HashLocation, (Root) => {
   React.render(<Root />, document.getElementById('container'));
 });
