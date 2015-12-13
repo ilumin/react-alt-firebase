@@ -19,7 +19,7 @@ class Chat extends React.Component {
             display: 'flex',
             flexFlow: 'row wrap'
           }}>
-          <ChannelList />
+          <ChannelList {...this.props} />
           <MessageList />
         </div>
         <div style={{
