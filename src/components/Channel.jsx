@@ -1,5 +1,6 @@
 import React from 'react';
 import mui from 'material-ui';
+import Actions from '../actions';
 
 const {
   ListItem
@@ -10,6 +11,10 @@ class Channel extends React.Component {
     super(props);
   }
 
+  onClick() {
+    Actions.channelOpened(this.props.channel);
+  }
+
   render () {
     let style = {};
 
@@ -18,7 +23,13 @@ class Channel extends React.Component {
     }
 
     return (
-      <ListItem style={style}>{this.props.channel.name}</ListItem>
+      <ListItem
+        onClick={this.onClick.bind(this)}
+        style={style}
+        key={this.props.channel.key}
+        >
+        {this.props.channel.name}
+      </ListItem>
     );
   }
 }
